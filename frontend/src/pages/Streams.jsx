@@ -45,7 +45,7 @@ const PageContent = () => {
   if (authUser.user_level <= USER_LEVELS.STANDARD) {
     handleStreamsReady();
   }
-
+  
   return (
     <Box h={'100vh'} w={'100%'} display={'flex'} style={{ overflowX: 'auto' }}>
         <Box p={10} miw={'100px'} style={{ overflowX: 'auto' }}>
