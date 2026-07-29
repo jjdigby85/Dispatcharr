@@ -47,12 +47,12 @@ const PageContent = () => {
   }
 
   return (
-    <Box h={'100vh'} w={'100%'} display={'flex'} flexDirection={'column'}>
-      <Box p={10} w={'100%'} flex={'1'} style={{ overflowX: 'auto' }}>
-        <Box w={'100%'}>
-          <StreamsTable onReady={handleStreamsReady} />
+     <Box h={'100vh'} w={'100%'} display={'flex'} style={{ overflowX: 'auto' }}>
+        <Box p={10} style={{ overflowX: 'auto' }}>
+          <Box w={'100%'}>
+            <StreamsTable onReady={handleStreamsReady} />
+          </Box>
         </Box>
-      </Box>
     </Box>
   );
 };
