@@ -48,8 +48,8 @@ const PageContent = () => {
 
   return (
     <Box h={'100vh'} w={'100%'} display={'flex'} style={{ overflowX: 'auto' }}>
-        <Box p={10} w={'100%'} style={{ overflowX: 'auto' }}>
-          <Box miw={'100vh'}>
+        <Box p={10} miw={'100px'} style={{ overflowX: 'auto' }}>
+          <Box w={'100%'}>
             <StreamsTable onReady={handleStreamsReady} />
           </Box>
         </Box>
