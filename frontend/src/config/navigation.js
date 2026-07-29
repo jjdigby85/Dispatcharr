@@ -19,7 +19,7 @@ import {
 
 export const NAV_ITEMS = {
   channels: {
-    id: 'streams',
+    id: 'channels',
     label: 'Streams',
     icon: ListOrdered,
     path: '/streams',
@@ -104,7 +104,7 @@ export const NAV_ITEMS = {
 };
 
 export const DEFAULT_ADMIN_ORDER = [
-  'schannels',
+  'channels',
   'vods',
   'sources',
   'guide',
