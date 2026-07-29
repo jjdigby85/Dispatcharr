@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export const NAV_ITEMS = {
-  streams: {
+  channels: {
     id: 'streams',
     label: 'Streams',
     icon: ListOrdered,
@@ -104,7 +104,7 @@ export const NAV_ITEMS = {
 };
 
 export const DEFAULT_ADMIN_ORDER = [
-  'streams',
+  'schannels',
   'vods',
   'sources',
   'guide',
@@ -116,7 +116,7 @@ export const DEFAULT_ADMIN_ORDER = [
 ];
 
 export const DEFAULT_USER_ORDER = [
-  'streams',
+  'channels',
   'guide',
   'settings',
 ];
@@ -163,7 +163,7 @@ export const getOrderedNavItems = (userOrder, isAdmin, channelIds = []) => {
     };
 
     // Add badge for channels
-    if (id === 'streams') {
+    if (id === 'channels') {
       navItem.badge = `(${Array.isArray(channelIds) ? channelIds.length : 0})`;
     }
 
