@@ -19,10 +19,10 @@ import {
 
 export const NAV_ITEMS = {
   channels: {
-    id: 'channels',
-    label: 'Channels',
+    id: 'streams',
+    label: 'Streams',
     icon: ListOrdered,
-    path: '/channels',
+    path: '/streams',
     adminOnly: false,
     hasBadge: true,
   },
@@ -104,7 +104,7 @@ export const NAV_ITEMS = {
 };
 
 export const DEFAULT_ADMIN_ORDER = [
-  'channels',
+  'streams',
   'vods',
   'sources',
   'guide',
@@ -116,7 +116,7 @@ export const DEFAULT_ADMIN_ORDER = [
 ];
 
 export const DEFAULT_USER_ORDER = [
-  'channels',
+  'streams',
   'guide',
   'settings',
 ];
@@ -163,7 +163,7 @@ export const getOrderedNavItems = (userOrder, isAdmin, channelIds = []) => {
     };
 
     // Add badge for channels
-    if (id === 'channels') {
+    if (id === 'streams') {
       navItem.badge = `(${Array.isArray(channelIds) ? channelIds.length : 0})`;
     }
 
