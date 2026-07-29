@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export const NAV_ITEMS = {
-  channels: {
+  streams: {
     id: 'streams',
     label: 'Streams',
     icon: ListOrdered,
