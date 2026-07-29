@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Login from './pages/Login';
-import Channels from './pages/Channels';
+import Streams from './pages/Streams';
 import ContentSources from './pages/ContentSources';
 import Guide from './pages/Guide';
 import Stats from './pages/Stats';
@@ -37,7 +37,7 @@ import 'allotment/dist/style.css';
 
 const drawerWidth = 240;
 const miniDrawerWidth = 60;
-const defaultRoute = '/channels';
+const defaultRoute = '/streams';
 
 const App = () => {
   const [open, setOpen] = useState(true);
@@ -149,7 +149,7 @@ const App = () => {
                   <Routes>
                     {isAuthenticated && isInitialized ? (
                       <>
-                        <Route path="/channels" element={<Channels />} />
+                        <Route path="/streams" element={<Streams />} />
                         <Route path="/sources" element={<ContentSources />} />
                         <Route path="/guide" element={<Guide />} />
                         <Route path="/dvr" element={<DVR />} />
