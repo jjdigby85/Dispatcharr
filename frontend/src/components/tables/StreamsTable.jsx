@@ -261,7 +261,7 @@ const StreamsTable = ({ onReady }) => {
   // Default hidden: tvg_id, stats
   const DEFAULT_COLUMN_VISIBILITY = {
     actions: true,
-    select: true,
+    select: false,
     name: true,
     group: true,
     m3u: true,
