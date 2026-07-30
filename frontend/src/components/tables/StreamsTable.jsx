@@ -22,7 +22,7 @@ import {
   SquareMinus,
   SquarePlus,
   Play,
-  link,
+  Link,
 } from 'lucide-react';
 import {
   ActionIcon,
