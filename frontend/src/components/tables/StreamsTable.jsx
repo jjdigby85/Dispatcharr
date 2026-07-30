@@ -133,6 +133,7 @@ const StreamRowActions = ({
 
   return (
     <>
+      {/*
       <Tooltip label="Add to Channel" openDelay={500}>
         <ActionIcon
           size={iconSize}
@@ -151,7 +152,21 @@ const StreamRowActions = ({
           <ListPlus size="18" fontSize="small" />
         </ActionIcon>
       </Tooltip>
+     */}
 
+      <Tooltip label="Preview Stream" openDelay={500}>
+        <ActionIcon
+          size={iconSize}
+          color={theme.tailwind.green[5]}
+          variant="transparent"
+          onClick={onPreview}
+          style={{ background: 'none' }}
+        >
+          <Play size="18" fontSize="small" />
+        </ActionIcon>
+      </Tooltip>
+
+      {/*
       <Tooltip label="Create New Channel" openDelay={500}>
         <ActionIcon
           size={iconSize}
@@ -159,10 +174,24 @@ const StreamRowActions = ({
           variant="transparent"
           onClick={() => handleCreateChannelFromStream(row.original)}
         >
-          <SquarePlus size="18" fontSize="small" />
+          <Play size="18" fontSize="small" />
+        </ActionIcon>
+      </Tooltip>
+      */}
+
+      <Tooltip label="Copy URL" openDelay={500}>
+        <ActionIcon
+          size={iconSize}
+          color={theme.tailwind.blue[6]}
+          variant="transparent"
+          onClick={() => copyToClipboard(row.original.url)}
+          style={{ background: 'none' }}
+        >
+          <Link size="18" fontSize="small" />
         </ActionIcon>
       </Tooltip>
 
+      {/*
       <Menu>
         <MenuTarget>
           <ActionIcon variant="transparent" size={iconSize}>
@@ -191,6 +220,7 @@ const StreamRowActions = ({
           </MenuItem>
         </MenuDropdown>
       </Menu>
+      */}
     </>
   );
 };
@@ -1389,6 +1419,7 @@ const StreamsTable = ({ onReady }) => {
           style={{ padding: 10 }}
           gap={6}
         >
+          {/*
           <Flex gap={6} wrap="nowrap" style={{ flexShrink: 0 }}>
             <Tooltip
               label="Add selected stream(s) to the target channel"
@@ -1442,7 +1473,7 @@ const StreamsTable = ({ onReady }) => {
               </Button>
             </Tooltip>
           </Flex>
-
+          */}
           <Flex gap={6} wrap="nowrap" style={{ flexShrink: 0 }}>
             <Menu shadow="md" width={200}>
               <MenuTarget>
@@ -1492,7 +1523,7 @@ const StreamsTable = ({ onReady }) => {
                 </MenuItem>
               </MenuDropdown>
             </Menu>
-
+            {/*
             <Tooltip label="Create a new custom stream" openDelay={500}>
               <Button
                 leftSection={<SquarePlus size={18} />}
@@ -1522,7 +1553,7 @@ const StreamsTable = ({ onReady }) => {
                 Delete
               </Button>
             </Tooltip>
-
+            */}
             <Menu shadow="md" width={200}>
               <MenuTarget>
                 <Tooltip label="Table Settings" openDelay={500}>
