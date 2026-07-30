@@ -131,27 +131,33 @@ const StreamRowActions = ({
 
   return (
     <>
-      <Tooltip label="Preview Stream" openDelay={500}>
-        <ActionIcon
-          size={iconSize}
-          color={theme.tailwind.green[5]}
-          variant="transparent"
-          onClick={() => copyToClipboard(row.original.url)}
-          style={{ background: 'none' }}
-        >
-          <Eye size="18" fontSize="small" />
-        </ActionIcon>
-      </Tooltip>
-
-      <Tooltip label="Copy URL" openDelay={500}>
+      <Tooltip label="Add to Channel" openDelay={500}>
         <ActionIcon
           size={iconSize}
           color={theme.tailwind.blue[6]}
           variant="transparent"
-          onClick={() => copyToClipboard(row.original.url)}
+          onClick={addStreamToChannel}
           style={{ background: 'none' }}
+          disabled={
+            !targetChannelId ||
+            (channelSelectionStreams &&
+              channelSelectionStreams
+                .map((s) => s.id)
+                .includes(row.original.id))
+          }
         >
-          <Copy size="18" fontSize="small" />
+          <ListPlus size="18" fontSize="small" />
+        </ActionIcon>
+      </Tooltip>
+
+      <Tooltip label="Create New Channel" openDelay={500}>
+        <ActionIcon
+          size={iconSize}
+          color={theme.tailwind.green[5]}
+          variant="transparent"
+          onClick={() => handleCreateChannelFromStream(row.original)}
+        >
+          <SquarePlus size="18" fontSize="small" />
         </ActionIcon>
       </Tooltip>
 
