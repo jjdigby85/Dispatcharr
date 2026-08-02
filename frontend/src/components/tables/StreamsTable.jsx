@@ -110,7 +110,8 @@ const StreamRowActions = ({
       row.original.stream_hash
     );
     handleWatchStream(row.original.stream_hash, row.original.name);
-  }, [row.original, handleWatchStream]); // Add proper dependencies to ensure correct stream
+  // Add proper dependencies to ensure correct stream
+  }, [row.original, handleWatchStream]); 
 
   const iconSize =
     tableSize == 'default' ? 'sm' : tableSize == 'compact' ? 'xs' : 'md';
