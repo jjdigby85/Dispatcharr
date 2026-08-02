@@ -21,6 +21,7 @@ import {
   SquareCheck,
   SquareMinus,
   SquarePlus,
+  Play,
 } from 'lucide-react';
 import {
   ActionIcon,
@@ -126,7 +127,7 @@ const StreamRowActions = ({
           onClick={onPreview}
           style={{ background: 'none' }}
         >
-          <ListPlus size="18" fontSize="small" />
+          <Play size="18" fontSize="small" />
         </ActionIcon>
       </Tooltip>
 
@@ -137,7 +138,7 @@ const StreamRowActions = ({
           variant="transparent"
           onClick={() => copyToClipboard(row.original.url)}
         >
-          <SquarePlus size="18" fontSize="small" />
+          <Copy size="18" fontSize="small" />
         </ActionIcon>
       </Tooltip>
     </>
