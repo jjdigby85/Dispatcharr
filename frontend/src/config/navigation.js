@@ -117,7 +117,7 @@ export const DEFAULT_ADMIN_ORDER = [
 
 export const DEFAULT_USER_ORDER = [
   'channels',
-  'guide',
+  'sources',
   'settings',
 ];
 
