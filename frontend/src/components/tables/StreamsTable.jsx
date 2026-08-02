@@ -211,7 +211,7 @@ const StreamsTable = ({ onReady }) => {
   // Default hidden: tvg_id, stats
   const DEFAULT_COLUMN_VISIBILITY = {
     actions: true,
-    select: true,
+    select: false,
     name: true,
     group: true,
     m3u: true,
@@ -642,25 +642,6 @@ const StreamsTable = ({ onReady }) => {
     );
   };
 
-  const createChannelsFromSelection = async () => {
-    if (selectedStreamIds.length === 1) {
-      const selectedStream = await resolveSelectedStream(selectedStreamIds[0]);
-      if (selectedStream) {
-        await handleCreateChannelFromStream(selectedStream);
-      } else {
-        showNotification({
-          color: 'red',
-          title: 'Stream not found',
-          message:
-            'The selected stream could not be resolved. Please refresh and try again.',
-        });
-      }
-      return;
-    }
-
-    await createChannelsFromStreams();
-  };
-
   // Separate function to actually execute the channel creation
   const executeChannelCreation = async (
     startingChannelNumberValue,
@@ -724,62 +705,6 @@ const StreamsTable = ({ onReady }) => {
   const editStream = async (stream = null) => {
     setStream(stream);
     setModalOpen(true);
-  };
-
-  const handleDeleteStream = async (id) => {
-    // Get stream details for the confirmation dialog
-    const streamObj = data.find((s) => s.id === id);
-    setStreamToDelete(streamObj);
-    setDeleteTarget(id);
-    setIsBulkDelete(false);
-
-    // Skip warning if it's been suppressed
-    if (isWarningSuppressed('delete-stream')) {
-      return executeDeleteStream(id);
-    }
-
-    setConfirmDeleteOpen(true);
-  };
-
-  const executeDeleteStream = async (id) => {
-    setDeleting(true);
-    setIsLoading(true);
-    try {
-      await deleteStream(id);
-      // Clear the selection for the deleted stream
-      setSelectedStreamIds([]);
-      table.setSelectedTableIds([]);
-    } finally {
-      setDeleting(false);
-      setIsLoading(false);
-      setConfirmDeleteOpen(false);
-    }
-  };
-
-  const handleDeleteStreams = async () => {
-    setIsBulkDelete(true);
-    setStreamToDelete(null);
-
-    // Skip warning if it's been suppressed
-    if (isWarningSuppressed('delete-streams')) {
-      return executeDeleteStreams();
-    }
-
-    setConfirmDeleteOpen(true);
-  };
-
-  const executeDeleteStreams = async () => {
-    setDeleting(true);
-    setIsLoading(true);
-    try {
-      await deleteStreams(selectedStreamIds);
-      setSelectedStreamIds([]);
-      table.setSelectedTableIds([]);
-    } finally {
-      setDeleting(false);
-      setIsLoading(false);
-      setConfirmDeleteOpen(false);
-    }
   };
 
   const closeStreamForm = async () => {
@@ -866,17 +791,6 @@ const StreamsTable = ({ onReady }) => {
 
   const handleSingleNumberingModeChange = (nextMode) => {
     setSingleChannelMode(nextMode);
-  };
-
-  const handleAddStreamsToChannel = async () => {
-    // Look up full stream objects from the current page data
-    const selectedIdSet = new Set(selectedStreamIds);
-    const newStreams = data.filter((s) => selectedIdSet.has(s.id));
-    await addStreamsToChannel(
-      targetChannelId,
-      channelSelectionStreams,
-      newStreams
-    );
   };
 
   const onRowSelectionChange = (updatedIds) => {
@@ -1340,57 +1254,6 @@ const StreamsTable = ({ onReady }) => {
           gap={6}
         >
           <Flex gap={6} wrap="nowrap" style={{ flexShrink: 0 }}>
-            <Tooltip
-              label="Add selected stream(s) to the target channel"
-              openDelay={500}
-            >
-              <Button
-                leftSection={<SquarePlus size={18} />}
-                variant={
-                  selectedStreamIds.length > 0 && targetChannelId
-                    ? 'light'
-                    : 'default'
-                }
-                size="xs"
-                onClick={handleAddStreamsToChannel}
-                p={5}
-                color={
-                  selectedStreamIds.length > 0 && targetChannelId
-                    ? theme.tailwind.green[5]
-                    : undefined
-                }
-                style={
-                  selectedStreamIds.length > 0 && targetChannelId
-                    ? {
-                        borderWidth: '1px',
-                        borderColor: theme.tailwind.green[5],
-                        color: 'white',
-                      }
-                    : undefined
-                }
-                disabled={!(selectedStreamIds.length > 0 && targetChannelId)}
-              >
-                Add to Channel
-              </Button>
-            </Tooltip>
-
-            <Tooltip
-              label={`Create channels from ${selectedStreamIds.length} stream(s)`}
-              openDelay={500}
-            >
-              <Button
-                leftSection={<SquarePlus size={18} />}
-                variant="default"
-                size="xs"
-                onClick={createChannelsFromSelection}
-                p={5}
-                disabled={selectedStreamIds.length == 0}
-              >
-                {selectedStreamIds.length <= 1
-                  ? `Create Channel (${selectedStreamIds.length})`
-                  : `Create Channels (${selectedStreamIds.length})`}
-              </Button>
-            </Tooltip>
           </Flex>
 
           <Flex gap={6} wrap="nowrap" style={{ flexShrink: 0 }}>
@@ -1442,36 +1305,6 @@ const StreamsTable = ({ onReady }) => {
                 </MenuItem>
               </MenuDropdown>
             </Menu>
-
-            <Tooltip label="Create a new custom stream" openDelay={500}>
-              <Button
-                leftSection={<SquarePlus size={18} />}
-                variant="light"
-                size="xs"
-                onClick={() => editStream()}
-                p={5}
-                color={theme.tailwind.green[5]}
-                style={{
-                  borderWidth: '1px',
-                  borderColor: theme.tailwind.green[5],
-                  color: 'white',
-                }}
-              >
-                Create Stream
-              </Button>
-            </Tooltip>
-
-            <Tooltip label="Delete selected stream(s)" openDelay={500}>
-              <Button
-                leftSection={<SquareMinus size={18} />}
-                variant="default"
-                size="xs"
-                onClick={handleDeleteStreams}
-                disabled={selectedStreamIds.length == 0}
-              >
-                Delete
-              </Button>
-            </Tooltip>
 
             <Menu shadow="md" width={200}>
               <MenuTarget>
@@ -1708,40 +1541,6 @@ const StreamsTable = ({ onReady }) => {
         selectedProfileIds={singleSelectedProfileIds}
         onProfileIdsChange={setSingleSelectedProfileIds}
         channelProfiles={channelProfiles ? Object.values(channelProfiles) : []}
-      />
-
-      <ConfirmationDialog
-        opened={confirmDeleteOpen}
-        onClose={() => setConfirmDeleteOpen(false)}
-        onConfirm={() =>
-          isBulkDelete
-            ? executeDeleteStreams()
-            : executeDeleteStream(deleteTarget)
-        }
-        title={`Confirm ${isBulkDelete ? 'Bulk ' : ''}Stream Deletion`}
-        message={
-          isBulkDelete ? (
-            `Are you sure you want to delete ${selectedStreamIds.length} stream${selectedStreamIds.length !== 1 ? 's' : ''}? This action cannot be undone.`
-          ) : streamToDelete ? (
-            <div style={{ whiteSpace: 'pre-line' }}>
-              {`Are you sure you want to delete the following stream?
-
-Name: ${streamToDelete.name}
-${streamToDelete.channel_group ? `Group: ${channelGroups[streamToDelete.channel_group]?.name || 'Unknown'}` : ''}
-${streamToDelete.m3u_account ? `M3U Account: ${playlists.find((p) => p.id === streamToDelete.m3u_account)?.name || 'Unknown'}` : ''}
-
-This action cannot be undone.`}
-            </div>
-          ) : (
-            'Are you sure you want to delete this stream? This action cannot be undone.'
-          )
-        }
-        confirmLabel="Delete"
-        cancelLabel="Cancel"
-        actionKey={isBulkDelete ? 'delete-streams' : 'delete-stream'}
-        onSuppressChange={suppressWarning}
-        loading={deleting}
-        size="md"
       />
     </>
   );
