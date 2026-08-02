@@ -100,20 +100,6 @@ const StreamRowActions = ({
       state.channels.find((chan) => chan.id === targetChannelId)?.streams
   );
 
-  const addStreamToChannel = async () => {
-    await addStreamsToChannel(targetChannelId, channelSelectionStreams, [
-      row.original,
-    ]);
-  };
-
-  const onEdit = useCallback(() => {
-    editStream(row.original);
-  }, [row.original, editStream]);
-
-  const onDelete = useCallback(() => {
-    handleDeleteStream(row.original.id);
-  }, [row.original.id, handleDeleteStream]);
-
   const onPreview = useCallback(() => {
     console.log(
       'Previewing stream:',
@@ -131,64 +117,28 @@ const StreamRowActions = ({
 
   return (
     <>
-      <Tooltip label="Add to Channel" openDelay={500}>
+      <Tooltip label="Preview Stream" openDelay={500}>
         <ActionIcon
           size={iconSize}
           color={theme.tailwind.blue[6]}
           variant="transparent"
-          onClick={addStreamToChannel}
+          onClick={onPreview}
           style={{ background: 'none' }}
-          disabled={
-            !targetChannelId ||
-            (channelSelectionStreams &&
-              channelSelectionStreams
-                .map((s) => s.id)
-                .includes(row.original.id))
-          }
         >
           <ListPlus size="18" fontSize="small" />
         </ActionIcon>
       </Tooltip>
 
-      <Tooltip label="Create New Channel" openDelay={500}>
+      <Tooltip label="Copy URL" openDelay={500}>
         <ActionIcon
           size={iconSize}
           color={theme.tailwind.green[5]}
           variant="transparent"
-          onClick={() => handleCreateChannelFromStream(row.original)}
+          onClick={() => copyToClipboard(row.original.url)}
         >
           <SquarePlus size="18" fontSize="small" />
         </ActionIcon>
       </Tooltip>
-
-      <Menu>
-        <MenuTarget>
-          <ActionIcon variant="transparent" size={iconSize}>
-            <EllipsisVertical size="18" />
-          </ActionIcon>
-        </MenuTarget>
-
-        <MenuDropdown>
-          <MenuItem leftSection={<Copy size="14" />}>
-            <UnstyledButton
-              variant="unstyled"
-              size="xs"
-              onClick={() => copyToClipboard(row.original.url)}
-            >
-              <Text size="xs">Copy URL</Text>
-            </UnstyledButton>
-          </MenuItem>
-          <MenuItem onClick={onEdit} disabled={!row.original.is_custom}>
-            <Text size="xs">Edit</Text>
-          </MenuItem>
-          <MenuItem onClick={onDelete} disabled={!row.original.is_custom}>
-            <Text size="xs">Delete Stream</Text>
-          </MenuItem>
-          <MenuItem onClick={onPreview}>
-            <Text size="xs">Preview Stream</Text>
-          </MenuItem>
-        </MenuDropdown>
-      </Menu>
     </>
   );
 };
