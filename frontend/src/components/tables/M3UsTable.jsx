@@ -74,7 +74,7 @@ const RowActions = ({
   handleRefreshPlaylist,
 }) => {
   const iconSize =
-    tableSize == 'default' ? 'sm' : tableSize == 'compact' ? 'xs' : 'md';
+    tableSize == 'default' ? 'md' : tableSize == 'compact' ? 'sm' : 'md';
 
   return (
     <>
