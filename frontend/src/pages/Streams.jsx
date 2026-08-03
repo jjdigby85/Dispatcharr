@@ -46,7 +46,7 @@ const PageContent = () => {
     handleStreamsReady();
   }
   
-return (
+  return (
     <Box h={'100dvh'} w={'100%'} display={'flex'} flexDirection={'column'} style={{ overflow: 'hidden' }}>
         <Box p={10} w={'100%'} style={{ overflow: 'auto', flexGrow: 1 }}>
           <Box miw={'600px'}>
@@ -54,7 +54,8 @@ return (
           </Box>
         </Box>
     </Box>
-);
+  );
+};
 
 const ChannelsPage = () => {
   return (
