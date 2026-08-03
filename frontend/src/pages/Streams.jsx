@@ -46,16 +46,15 @@ const PageContent = () => {
     handleStreamsReady();
   }
   
-  return (
-    <Box h={'100vh'} w={'100%'} display={'flex'} style={{ overflowX: 'auto' }}>
-        <Box p={10} w={'100%'} style={{ overflowX: 'auto' }}>
-          <Box miw={'100vh'}>
+return (
+    <Box h={'100dvh'} w={'100%'} display={'flex'} flexDirection={'column'} style={{ overflow: 'hidden' }}>
+        <Box p={10} w={'100%'} style={{ overflow: 'auto', flexGrow: 1 }}>
+          <Box miw={'600px'}>
             <StreamsTable onReady={handleStreamsReady} />
           </Box>
         </Box>
     </Box>
-  );
-};
+);
 
 const ChannelsPage = () => {
   return (
