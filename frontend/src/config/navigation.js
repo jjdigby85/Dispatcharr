@@ -24,7 +24,7 @@ export const NAV_ITEMS = {
     icon: ListOrdered,
     path: '/streams',
     adminOnly: false,
-    hasBadge: true,
+    hasBadge: false,
   },
   vods: {
     id: 'vods',
@@ -38,14 +38,14 @@ export const NAV_ITEMS = {
     label: 'M3U & EPG Manager',
     icon: Play,
     path: '/sources',
-    adminOnly: true,
+    adminOnly: false,
   },
   guide: {
     id: 'guide',
     label: 'TV Guide',
     icon: LayoutGrid,
     path: '/guide',
-    adminOnly: false,
+    adminOnly: true,
   },
   dvr: {
     id: 'dvr',
