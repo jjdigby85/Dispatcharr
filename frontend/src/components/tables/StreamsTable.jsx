@@ -115,7 +115,7 @@ const StreamRowActions = ({
   }, [row.original, handleWatchStream]); 
 
   const iconSize =
-    tableSize == 'default' ? 'sm' : tableSize == 'compact' ? 'xs' : 'md';
+    tableSize == 'default' ? 'md' : tableSize == 'compact' ? 'md' : 'lg';
 
   return (
     <>
