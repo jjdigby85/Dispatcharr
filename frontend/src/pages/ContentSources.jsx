@@ -9,24 +9,13 @@ const PageContent = () => {
   if (error) throw new Error(error);
 
   return (
-    <Stack
-      p="10"
-      h="100%" // Set a specific height to ensure proper display
-      miw="1100px" // Prevent tables from becoming too cramped
-      style={{
-        overflowX: 'auto', // Enable horizontal scrolling when needed
-        overflowY: 'auto', // Enable vertical scrolling on the container
-      }}
-      spacing="xs" // Reduce spacing to give tables more room
-    >
-      <Box sx={{ flex: '1 1 50%', overflow: 'hidden' }}>
+    <Box h={'100dvh'} w={'100%'} display={'flex'} flexDirection={'column'} style={{ overflow: 'hidden' }}>
+      <Box p={10} w={'100%'} style={{ overflow: 'auto', flexGrow: 1 }}>
+        <Box miw={'600px'}>
         <M3UsTable />
+        </Box>  
       </Box>
-
-      <Box sx={{ flex: '1 1 50%', overflow: 'hidden' }}>
-        <EPGsTable />
-      </Box>
-    </Stack>
+    </Box>
   );
 };
 
