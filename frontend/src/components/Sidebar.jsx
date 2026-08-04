@@ -230,7 +230,7 @@ const Sidebar = ({ collapsed, toggleDrawer, drawerWidth, miniDrawerWidth }) => {
               minWidth: collapsed ? 0 : 150, // Prevents reflow
             }}
           >
-            Dispatcharr
+            Provider Panel
           </Text>
         )}
       </Group>
