@@ -917,32 +917,20 @@ const StreamsTable = ({ onReady }) => {
     }
 
     switch (header.id) {
-      case 'name':
-        return (
-          <Flex align="center" style={{ width: '100%', flex: 1 }}>
-            <TextInput
-              name="name"
-              placeholder="Name"
-              value={filters.name || ''}
-              onClick={(e) => e.stopPropagation()}
-              onChange={handleFilterChange}
-              size="xs"
-              variant="unstyled"
-              className="table-input-header"
-              leftSection={<Search size={14} opacity={0.5} />}
-              style={{ flex: 1, minWidth: 0 }}
-              rightSectionPointerEvents="auto"
-              rightSection={React.createElement(sortingIcon, {
-                onClick: (e) => {
-                  e.stopPropagation();
-                  onSortingChange('name');
-                },
-                size: 14,
-                style: { cursor: 'pointer' },
-              })}
-            />
-          </Flex>
-        );
+    case 'name':
+      return (
+        <Flex align="center" justify="space-between" style={{ width: '100%' }}>
+          <Text size="xs" fw={500} c="dimmed">Name</Text>
+          {React.createElement(sortingIcon, {
+            onClick: (e) => {
+              e.stopPropagation();
+              onSortingChange('name');
+            },
+            size: 14,
+            style: { cursor: 'pointer' },
+          })}
+        </Flex>
+      );
 
       case 'group': {
         const selectedGroups = filters.channel_group
@@ -1310,6 +1298,15 @@ const StreamsTable = ({ onReady }) => {
           gap={6}
         >
           <Flex gap={6} wrap="nowrap" style={{ flexShrink: 0 }}>
+            <TextInput
+                name="name"
+                placeholder="Search streams..."
+                value={filters.name || ''}
+                onChange={handleFilterChange}
+                size="xs"
+                leftSection={<Search size={14} opacity={0.5} />}
+                style={{ width: 250 }} // Set a comfortable fixed/min width
+            />
           </Flex>
 
           <Flex gap={6} wrap="nowrap" style={{ flexShrink: 0 }}>
