@@ -1,6 +1,5 @@
 import useUserAgentsStore from '../store/userAgents';
 import M3UsTable from '../components/tables/M3UsTable';
-import EPGsTable from '../components/tables/EPGsTable';
 import { Box, Stack } from '@mantine/core';
 import ErrorBoundary from '../components/ErrorBoundary';
 
