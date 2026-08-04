@@ -721,7 +721,7 @@ const M3UTable = () => {
             marginBottom: 0,
           }}
         >
-          M3U Accounts
+          Providers
         </Text>
         <Flex gap={6}>
           <Button
@@ -770,7 +770,7 @@ const M3UTable = () => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          height: 'calc(40vh - 15px)',
+          height: '100vh',
         }}
       >
         <Box
