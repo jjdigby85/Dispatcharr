@@ -201,46 +201,41 @@ export default class API {
   }
 
   static async getChannels() {
-    try {
-      // Paginate through channels to avoid heavy single response
-      const pageSize = 200;
-      const allChannels = [];
+  try {
+    const pageSize = 200;
 
-      // Get first page to get total results count
-      const data = await request(
-        `${host}/api/channels/channels/?page=1&page_size=${pageSize}`
-      );
+    // Get first page to inspect response structure and total count
+    const data = await request(
+      `${host}/api/channels/channels/?page=1&page_size=${pageSize}`
+    );
 
-      // Backward compatibility: if endpoint returns an array (legacy), just return it
-      if (Array.isArray(data)) {
-        return data;
-      }
-
-      allChannels.concat(Array.isArray(data?.results) ? data.results : []);
-
-      const totalPages = Math.max(1, Math.ceil(data.count / pageSize)) - 1;
-      const apiCalls = [];
-      for (let page = 2; page <= totalPages; page++) {
-        apiCalls.push(
-          new Promise(async (resolve) => {
-            const response = await request(
-              `${host}/api/channels/channels/?page=${page}&page_size=${pageSize}`
-            );
-
-            return resolve(
-              Array.isArray(response?.results) ? response.results : []
-            );
-          })
-        );
-      }
-
-      const allResults = await Limiter.all(5, apiCalls);
-
-      return allResults;
-    } catch (e) {
-      errorNotification('Failed to retrieve channels', e);
+    // Backward compatibility: if endpoint returns an array (legacy), return directly
+    if (Array.isArray(data)) {
+      return data;
     }
+
+    const firstPageResults = Array.isArray(data?.results) ? data.results : [];
+    const totalPages = Math.max(1, Math.ceil((data?.count || 0) / pageSize));
+
+    // Prepare remaining page requests
+    const apiCalls = [];
+    for (let page = 2; page <= totalPages; page++) {
+      apiCalls.push(
+        request(
+          `${host}/api/channels/channels/?page=${page}&page_size=${pageSize}`
+        ).then((res) => (Array.isArray(res?.results) ? res.results : []))
+      );
+    }
+
+    const remainingPages = await Limiter.all(5, apiCalls);
+
+    // Flatten all pages together starting with page 1
+    return [firstPageResults, ...remainingPages].flat();
+  } catch (e) {
+    errorNotification('Failed to retrieve channels', e);
+    return [];
   }
+}
 
   /**
    * Retrieve a lightweight summary of channels (id, name, logo_id,
