@@ -18,8 +18,8 @@ import {
 } from 'lucide-react';
 
 export const NAV_ITEMS = {
-  channels: {
-    id: 'channels',
+  streams: {
+    id: 'streams',
     label: 'Streams',
     icon: Play,
     path: '/streams',
@@ -102,7 +102,7 @@ export const NAV_ITEMS = {
 };
 
 export const DEFAULT_ADMIN_ORDER = [
-  'channels',
+  'streams',
   'vods',
   'sources',
   'guide',
@@ -114,7 +114,7 @@ export const DEFAULT_ADMIN_ORDER = [
 ];
 
 export const DEFAULT_USER_ORDER = [
-  'channels',
+  'streams',
   'sources',
   'settings',
 ];
