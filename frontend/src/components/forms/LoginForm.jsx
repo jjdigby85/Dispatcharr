@@ -171,7 +171,7 @@ const LoginForm = () => {
             fit="contain"
           />
           <Title order={2} align="center">
-            Dispatcharr
+            Stream Manager
           </Title>
           <Text size="sm" color="dimmed" align="center">
             Welcome back! Please log in to continue.
