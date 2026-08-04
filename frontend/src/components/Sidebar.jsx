@@ -72,9 +72,8 @@ const NavLink = ({ item, isActive, collapsed }) => {
           {item.label}
         </Text>
       )}
-      {!collapsed && item.badge && (
+      {!collapsed && (
         <Text size="sm" style={{ color: '#D4D4D8', whiteSpace: 'nowrap' }}>
-          {item.badge}
         </Text>
       )}
     </UnstyledButton>
