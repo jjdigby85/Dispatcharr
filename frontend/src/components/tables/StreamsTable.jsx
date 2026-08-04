@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState, } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import StreamForm from '../forms/Stream';
 import CatchupIndicator from '../CatchupIndicator';
 import usePlaylistsStore from '../../store/playlists';
@@ -54,7 +54,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 import useSettingsStore from '../../store/settings';
 import useVideoStore from '../../store/useVideoStore';
-import useChannelsTableStore from '../../store/channelsTable';
 import useWarningsStore from '../../store/warnings';
 import { CustomTable, useTable } from './CustomTable';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -91,15 +90,6 @@ const StreamRowActions = ({
   table,
 }) => {
   const tableSize = table?.tableSize ?? 'default';
-  const expandedChannelId = useChannelsTableStore((s) => s.expandedChannelId);
-  const selectedChannelIds = useChannelsTableStore((s) => s.selectedChannelIds);
-  const targetChannelId =
-    expandedChannelId ||
-    (selectedChannelIds.length === 1 ? selectedChannelIds[0] : null);
-  const channelSelectionStreams = useChannelsTableStore(
-    (state) =>
-      state.channels.find((chan) => chan.id === targetChannelId)?.streams
-  );
 
   const onPreview = useCallback(() => {
     console.log(
@@ -111,7 +101,6 @@ const StreamRowActions = ({
       row.original.stream_hash
     );
     handleWatchStream(row.original.stream_hash, row.original.name);
-  // Add proper dependencies to ensure correct stream
   }, [row.original, handleWatchStream]); 
 
   const iconSize =
@@ -290,15 +279,6 @@ const StreamsTable = ({ onReady }) => {
   const fetchChannelGroups = useChannelsStore((s) => s.fetchChannelGroups);
   const channelGroups = useChannelsStore((s) => s.channelGroups);
 
-  const expandedChannelId = useChannelsTableStore((s) => s.expandedChannelId);
-  const selectedChannelIds = useChannelsTableStore((s) => s.selectedChannelIds);
-  const targetChannelId =
-    expandedChannelId ||
-    (selectedChannelIds.length === 1 ? selectedChannelIds[0] : null);
-  const channelSelectionStreams = useChannelsTableStore(
-    (state) =>
-      state.channels.find((chan) => chan.id === targetChannelId)?.streams
-  );
   const channelProfiles = useChannelsStore((s) => s.profiles);
   const selectedProfileId = useChannelsStore((s) => s.selectedProfileId);
   const env_mode = useSettingsStore((s) => s.environment.env_mode);
