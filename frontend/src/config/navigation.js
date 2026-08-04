@@ -21,10 +21,9 @@ export const NAV_ITEMS = {
   channels: {
     id: 'channels',
     label: 'Streams',
-    icon: ListOrdered,
+    icon: Play,
     path: '/streams',
     adminOnly: false,
-    hasBadge: false,
   },
   vods: {
     id: 'vods',
@@ -35,8 +34,8 @@ export const NAV_ITEMS = {
   },
   sources: {
     id: 'sources',
-    label: 'M3U & EPG Manager',
-    icon: Play,
+    label: 'M3U Manager',
+    icon: ListOrdered,
     path: '/sources',
     adminOnly: false,
   },
@@ -89,7 +88,6 @@ export const NAV_ITEMS = {
     canHide: false,
     paths: [
       { label: 'Users', icon: User, path: '/users' },
-      { label: 'Logo Manager', icon: FileImage, path: '/logos' },
       { label: 'Settings', icon: LucideSettings, path: '/settings' },
     ],
   },
