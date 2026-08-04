@@ -346,19 +346,17 @@ const StreamsTable = ({ onReady }) => {
       {
         header: 'Name',
         accessorKey: 'name',
-        grow: true,
         size: columnSizing.name || 200,
         minSize: 100,
         cell: ({ getValue, row }) => (
-          <Flex align="center" gap={6} style={{ minWidth: 0 }}>
+          <Flex align="center" gap={6} style={{ minWidth: 0, width: '100%' }}>
             <Tooltip label={getValue()} openDelay={500}>
               <Box
                 style={{
-                  whiteSpace: 'pre',
+                  whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   minWidth: 0,
-                  flex: 1,
                 }}
               >
                 {getValue()}
