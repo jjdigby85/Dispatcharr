@@ -236,6 +236,16 @@ const M3UTable = () => {
     }
   };
 
+  const handleRefreshAllPlaylists = async () => {
+  // Only refresh active playlists
+  const activePlaylists = playlists.filter((p) => p.is_active);
+
+  // Trigger handleRefreshPlaylist for each active playlist
+    for (const p of activePlaylists) {
+      handleRefreshPlaylist(p.id);
+    }
+  };
+
   const handleDeletePlaylist = async (id) => {
     // Get playlist details for the confirmation dialog
     const playlist = playlists.find((p) => p.id === id);
@@ -721,12 +731,26 @@ const M3UTable = () => {
             marginBottom: 0,
           }}
         >
-          Providers
+          M3U Manager
         </Text>
         <Flex gap={6}>
           <Button
+            leftSection={<RefreshCcw size={14} />}
             variant="light"
-            size="xs"
+            size="sm"
+            onClick={handleRefreshAllPlaylists}
+            p={5}
+            color="blue"
+            style={{
+              borderWidth: '1px',
+              borderColor: 'var(--mantine-color-blue-6)',
+            }}
+          >
+            Refresh ALL
+          </Button>
+          <Button
+            variant="light"
+            size="sm"
             onClick={() => setServerGroupsManagerOpen(true)}
             p={5}
           >
@@ -735,7 +759,7 @@ const M3UTable = () => {
           <Button
             leftSection={<SquarePlus size={14} />}
             variant="light"
-            size="xs"
+            size="sm"
             onClick={() => editPlaylist()}
             p={5}
             color="green"
