@@ -451,17 +451,6 @@ const Sidebar = ({ collapsed, toggleDrawer, drawerWidth, miniDrawerWidth }) => {
             </Text>
           </Tooltip>
           <Group gap="xs" wrap="nowrap">
-            <Tooltip label="About" position="top">
-              <ActionIcon
-                variant="transparent"
-                color="gray"
-                onClick={() => setAboutOpen(true)}
-              >
-                <HelpCircle size={20} />
-              </ActionIcon>
-            </Tooltip>
-            <DonateButton />
-            {isAuthenticated && <NotificationCenter />}
           </Group>
         </Group>
       )}
