@@ -918,7 +918,7 @@ const StreamsTable = ({ onReady }) => {
     case 'name':
       return (
         <Flex align="center" justify="space-between" style={{ width: '100%' }}>
-          <Text size="xs" fw={500} c="dimmed">Name</Text>
+          <Text size="sm" fw={500}>Name</Text>
           {React.createElement(sortingIcon, {
             onClick: (e) => {
               e.stopPropagation();
@@ -938,7 +938,7 @@ const StreamsTable = ({ onReady }) => {
           <MultiSelect
             placeholder="Group"
             searchable
-            size="xs"
+            size="sm"
             nothingFoundMessage="No options"
             onClick={handleSelectClick}
             onChange={handleGroupChange}
@@ -971,7 +971,7 @@ const StreamsTable = ({ onReady }) => {
               placeholder="M3U"
               searchable
               clearable
-              size="xs"
+              size="sm"
               nothingFoundMessage="No options"
               onClick={handleSelectClick}
               onChange={handleM3UChange}
@@ -1003,7 +1003,7 @@ const StreamsTable = ({ onReady }) => {
               value={filters.tvg_id || ''}
               onClick={(e) => e.stopPropagation()}
               onChange={handleFilterChange}
-              size="xs"
+              size="sm"
               variant="unstyled"
               className="table-input-header"
               leftSection={<Search size={14} opacity={0.5} />}
