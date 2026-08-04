@@ -230,7 +230,7 @@ const Sidebar = ({ collapsed, toggleDrawer, drawerWidth, miniDrawerWidth }) => {
               minWidth: collapsed ? 0 : 150, // Prevents reflow
             }}
           >
-            Provider Panel
+            Stream Manager
           </Text>
         )}
       </Group>
