@@ -57,7 +57,7 @@ const PageContent = () => {
   );
 };
 
-const ChannelsPage = () => {
+const StreamsPage = () => {
   return (
     <ErrorBoundary>
       <PageContent />
@@ -65,4 +65,4 @@ const ChannelsPage = () => {
   );
 };
 
-export default ChannelsPage;
+export default StreamsPage;
